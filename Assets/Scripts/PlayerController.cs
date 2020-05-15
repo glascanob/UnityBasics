@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateControls();
+        UpdateAnimator();
         
         if(rb.velocity.x >0)
         {
@@ -33,6 +35,11 @@ public class PlayerController : MonoBehaviour
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
         }
+    }
+
+    void UpdateAnimator()
+    {
+        anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
     void UpdateControls()
