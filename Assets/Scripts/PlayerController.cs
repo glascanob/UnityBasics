@@ -12,7 +12,20 @@ public class PlayerController : MonoBehaviour
     //Variables that control our player
     [SerializeField]
     float speed;
+    [SerializeField]
+    float jumpForce;
 
+    //Other Variables
+    [SerializeField]
+    Transform groundCheck;
+
+    [SerializeField]
+    Vector2 groundCheckSize;
+
+    [SerializeField]
+    LayerMask ground;
+    
+    bool grounded;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +34,17 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+
+        Gizmos.DrawCube(groundCheck.position, groundCheckSize);
+    }
+    // Very usefull when talking about physics
+    private void FixedUpdate()
+    {
+        grounded = Physics2D.OverlapBox(groundCheck.position, groundCheckSize, 0, ground);
+    }
     // Update is called once per frame
     void Update()
     {
@@ -39,15 +63,29 @@ public class PlayerController : MonoBehaviour
 
     void UpdateAnimator()
     {
+        anim.SetBool("Grounded", grounded);
+        anim.SetFloat("VSpeed", rb.velocity.y);
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
     void UpdateControls()
     {
+        
+        if(Input.GetAxis("Jump") > 0 && grounded) //Check if the player is on the ground
+        {
+            Jump();
+        }
+
         float horizontalInput = Input.GetAxis("Horizontal");
 
         horizontalInput = horizontalInput * speed;
 
         rb.velocity = new Vector2(horizontalInput, rb.velocity.y);
+    }
+
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        anim.SetTrigger("Jump");
     }
 }
