@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     LayerMask ground;
     
     bool grounded;
+    public bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +49,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(dead)
+        {
+            rb.velocity = Vector2.zero;
+            return;
+        }
         UpdateControls();
         UpdateAnimator();
         
