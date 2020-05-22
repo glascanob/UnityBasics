@@ -47,6 +47,12 @@ TagManager:
   - name: Tiles
     uniqueID: 1724349667
     locked: 0
+  - name: Back
+    uniqueID: 1152258619
+    locked: 0
   - name: Player
     uniqueID: 999913497
+    locked: 0
+  - name: Front
+    uniqueID: 2708719541
     locked: 0
