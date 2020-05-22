@@ -20,7 +20,7 @@ AnimatorStateMachine:
     m_Position: {x: 560, y: 210, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4033040254001916185}
-    m_Position: {x: 550, y: 60, z: 0}
+    m_Position: {x: 580, y: 30, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -1442590120248016446}
@@ -247,6 +247,12 @@ AnimatorController:
     m_Controller: {fileID: 0}
   - m_Name: VSpeed
     m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: Attack
+    m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0

@@ -81,6 +81,16 @@ public class PlayerController : MonoBehaviour
         horizontalInput = horizontalInput * speed;
 
         rb.velocity = new Vector2(horizontalInput, rb.velocity.y);
+
+        if(Input.GetAxis("Fire1") > 0)
+        {
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+        anim.SetTrigger("Attack");
     }
 
     void Jump()
