@@ -7,6 +7,11 @@ public class GameManager : MonoBehaviour
     public Checkpoint currentCheckpoint;
     public PlayerController player;
 
+    /* This is not the most efficent nor optimized way to use a GameManager
+     * The FindObjectOfType is a powerfull but terrible for performance
+     * function that allows you to go through all the gameobjects in the
+     * hierarchy to find that component.
+     */ 
     private void Start()
     {
         player = FindObjectOfType<PlayerController>();
