@@ -37,6 +37,12 @@ public class PlayerController : MonoBehaviour
     bool grounded;
     [HideInInspector] //We don't need this variable to be shown on the inspector
     public bool dead = false;
+    public float maxHealth = 10;
+    public float health;
+
+    //Other
+    [HideInInspector]
+    public EnemyController enemy;
     #endregion
 
     /* Start is called before the first frame update so here we can
@@ -55,6 +61,7 @@ public class PlayerController : MonoBehaviour
          */
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        health = maxHealth;
     }
 
     /*We are using this Unity function to draw a gizmo that help us configure
@@ -125,14 +132,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+        anim.SetTrigger("Jump");
+    }
+
     void Attack()
     {
         anim.SetTrigger("Attack");
     }
 
-    void Jump()
+    public void DealDamage(int damage)
     {
-        rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-        anim.SetTrigger("Jump");
+        if(enemy != null)
+        {
+            //Damage enemy
+            enemy.ReceiveDamage(damage);
+        }
+    }
+
+    public void ReceiveDamage(int damgeAmount)
+    {
+        health = Mathf.Clamp(health - damgeAmount, 0, maxHealth);
     }
 }
