@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
     //Other
     [HideInInspector]
     public EnemyController enemy;
+    [HideInInspector]
+    public bool gamePaused = false;
     #endregion
 
     /* Start is called before the first frame update so here we can
@@ -83,6 +85,8 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gamePaused)
+            return;
         if(dead)
         {
             rb.velocity = Vector2.zero;
